@@ -89,8 +89,14 @@ ajs_smaller$nauth[!is.na(ajs_smaller$auth4)] <- 4
 ajs_smaller$nauth <- as.integer(ajs_smaller$nauth)
 ajs_smaller$title <- as.character(ajs_smaller$title)
 
+# how complex should your model be?
+lm(length ~ year + nauth, data = ajs_smaller) %>% summary()
+lm(length ~ year + factor(nauth), data = ajs_smaller) %>% summary()
+lm(length ~ year + factor(nauth) + year:factor(nauth), data = ajs_smaller) %>% summary()
+
 # Run linear model with interaction term
 ajs_mod <- lm(length ~ year + factor(nauth) + year:factor(nauth), data = ajs_smaller)
+
 # Save R-squared
 rsq <- summary(ajs_mod)$r.squared
 # Add to existing data
