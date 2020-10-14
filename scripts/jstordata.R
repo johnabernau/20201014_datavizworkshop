@@ -107,10 +107,14 @@ ajs_res$.resid <- ajs_res$length - ajs_res$.fitted
 colz <- brewer.pal(8, "Blues")
 colz <- colz[5:8]
 
+# build it... 
+ggplot(ajs_res, aes(year, length)) +
+  geom_point()
+
 # Plot results
 inter <- ggplot(ajs_res, aes(year, length)) +
   # geoms
-  geom_point(position = "jitter", aes(alpha = .resid, fill = .resid, size = .resid), pch = 21) +
+  geom_point(position = "jitter", aes(alpha = .resid, fill = .resid, size = .resid), shape = 21) +
   geom_line(size = 2, aes(y = .fitted, color = `factor(nauth)`)) +
   # scales
   scale_size(guide = F) +
